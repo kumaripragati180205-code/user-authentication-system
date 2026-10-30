@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Copy, Check, RefreshCw, X, AlertCircle } from 'lucide-react';
+import { ShieldCheck, Copy, Check, RefreshCw, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function TokenInspectorModal({ isOpen, onClose }) {
@@ -44,30 +44,30 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-3xl bg-slate-900 border border-slate-700/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-3xl bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] text-neutral-900 dark:text-white transition-colors duration-200">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-              <ShieldCheck className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700">
+              <ShieldCheck className="w-5 h-5 text-neutral-900 dark:text-white" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-100 flex items-center gap-2">
+              <h3 className="font-bold text-neutral-900 dark:text-white flex items-center gap-2">
                 Live JWT Token Inspector
-                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">
+                <span className="text-xs px-2 py-0.5 rounded-full border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900 font-mono">
                   HS256 Signed
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">
-                Inspect and decode the real JSON Web Token currently stored in your browser session
+              <p className="text-xs text-neutral-500">
+                Dissect real JSON Web Tokens stored in current session
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition"
+            className="p-2 rounded-lg text-neutral-500 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition"
           >
             <X className="w-4 h-4" />
           </button>
@@ -76,20 +76,20 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
         {/* Body content */}
         <div className="p-6 overflow-y-auto space-y-6 flex-1">
           {/* Expiration Bar */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="text-xs text-slate-400">Token Status & Expiry Timer:</div>
-              <div className="text-lg font-bold text-slate-100 flex items-center gap-2 mt-0.5 font-mono">
+              <div className="text-xs text-neutral-500 font-medium">Token Status & Timer:</div>
+              <div className="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2 mt-0.5 font-mono">
                 {tokenTimeLeft !== null ? (
                   tokenTimeLeft > 0 ? (
-                    <span className="text-emerald-400">
+                    <span>
                       Active: {Math.floor(tokenTimeLeft / 60)}m {tokenTimeLeft % 60}s remaining
                     </span>
                   ) : (
-                    <span className="text-rose-400">Expired — Refresh needed</span>
+                    <span className="underline">Expired — Refresh needed</span>
                   )
                 ) : (
-                  <span className="text-slate-500">No active token</span>
+                  <span className="text-neutral-400">No active token</span>
                 )}
               </div>
             </div>
@@ -98,17 +98,17 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
               <button
                 onClick={handleManualRefresh}
                 disabled={isRefreshing}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-medium transition shadow"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 disabled:opacity-50 text-xs font-bold transition shadow-sm"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
-                {isRefreshing ? 'Rotating...' : 'Rotate / Refresh Token'}
+                {isRefreshing ? 'Rotating...' : 'Rotate Token'}
               </button>
             </div>
           </div>
 
           {refreshSuccess && (
-            <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-              <Check className="w-4 h-4" />
+            <div className="p-3.5 rounded-2xl border border-neutral-900 dark:border-white bg-neutral-100 dark:bg-neutral-900 text-xs flex items-center gap-2 font-semibold">
+              <Check className="w-4 h-4 shrink-0" />
               Token rotated successfully! A fresh JWT access token has been generated.
             </div>
           )}
@@ -116,51 +116,51 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
           {/* Raw Encoded JWT Representation */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-500">
                 Raw Encoded JWT (Header . Payload . Signature)
               </span>
               <button
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 font-medium"
+                className="inline-flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white font-bold underline"
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? 'Copied' : 'Copy Token'}
               </button>
             </div>
-            <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 font-mono text-xs break-all select-all leading-relaxed">
-              <span className="text-rose-400 font-semibold">{headerRaw}</span>
-              <span className="text-slate-500">.</span>
-              <span className="text-purple-400 font-semibold">{payloadRaw}</span>
-              <span className="text-slate-500">.</span>
-              <span className="text-cyan-400 font-semibold">{signatureRaw}</span>
+            <div className="p-3.5 bg-neutral-100 dark:bg-neutral-900 rounded-2xl border border-neutral-300 dark:border-neutral-800 font-mono text-xs break-all select-all leading-relaxed">
+              <span className="font-bold">{headerRaw}</span>
+              <span className="text-neutral-400">.</span>
+              <span className="font-bold">{payloadRaw}</span>
+              <span className="text-neutral-400">.</span>
+              <span className="font-bold">{signatureRaw}</span>
             </div>
           </div>
 
           {/* Decoded Blocks */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Header Decoded */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-rose-500/20">
-              <div className="text-xs font-semibold text-rose-400 mb-2 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-rose-400"></span>
-                HEADER: Algorithm & Token Type
+            <div className="p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50">
+              <div className="text-xs font-bold text-neutral-900 dark:text-white mb-2 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-black dark:bg-white"></span>
+                HEADER: Algorithm & Type
               </div>
-              <pre className="text-xs font-mono text-slate-300 bg-slate-900/60 p-3 rounded-lg overflow-x-auto">
+              <pre className="text-xs font-mono text-neutral-800 dark:text-neutral-200 bg-white dark:bg-neutral-950 p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-x-auto">
                 {JSON.stringify(headerDecoded, null, 2)}
               </pre>
             </div>
 
             {/* Signature Info */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-cyan-500/20">
-              <div className="text-xs font-semibold text-cyan-400 mb-2 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <div className="p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50">
+              <div className="text-xs font-bold text-neutral-900 dark:text-white mb-2 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-black dark:bg-white"></span>
                 VERIFY SIGNATURE: HMAC-SHA256
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed bg-slate-900/60 p-3 rounded-lg">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed bg-white dark:bg-neutral-950 p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-mono">
                 HMACSHA256(
                 <br />
-                &nbsp;&nbsp;base64UrlEncode(header) + "." +
+                &nbsp;&nbsp;base64(header) + "." +
                 <br />
-                &nbsp;&nbsp;base64UrlEncode(payload),
+                &nbsp;&nbsp;base64(payload),
                 <br />
                 &nbsp;&nbsp;<strong>JWT_ACCESS_SECRET</strong>
                 <br />)
@@ -169,28 +169,28 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
           </div>
 
           {/* Payload Decoded */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-purple-500/20">
-            <div className="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-              PAYLOAD: Data Claims (User Identity & Role)
+          <div className="p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50">
+            <div className="text-xs font-bold text-neutral-900 dark:text-white mb-2 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-black dark:bg-white"></span>
+              PAYLOAD: Authenticated Claims
             </div>
-            <pre className="text-xs font-mono text-slate-300 bg-slate-900/60 p-3 rounded-lg overflow-x-auto mb-3">
+            <pre className="text-xs font-mono text-neutral-800 dark:text-neutral-200 bg-white dark:bg-neutral-950 p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-x-auto mb-3">
               {JSON.stringify(decodedToken, null, 2)}
             </pre>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-400 pt-2 border-t border-slate-800">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-neutral-500 pt-2 border-t border-neutral-200 dark:border-neutral-800">
               <div>
-                <strong className="text-slate-300">role:</strong> Used by RBAC middleware to allow/deny access
+                <strong className="text-neutral-900 dark:text-white font-mono">role:</strong> {decodedToken?.role || 'user'}
               </div>
               <div>
-                <strong className="text-slate-300">iat (Issued At):</strong>{' '}
+                <strong className="text-neutral-900 dark:text-white font-mono">iat:</strong>{' '}
                 {decodedToken?.iat ? new Date(decodedToken.iat * 1000).toLocaleTimeString() : 'N/A'}
               </div>
               <div>
-                <strong className="text-slate-300">id:</strong> Unique database primary key
+                <strong className="text-neutral-900 dark:text-white font-mono">id:</strong> {decodedToken?.id}
               </div>
               <div>
-                <strong className="text-slate-300">exp (Expires):</strong>{' '}
+                <strong className="text-neutral-900 dark:text-white font-mono">exp:</strong>{' '}
                 {decodedToken?.exp ? new Date(decodedToken.exp * 1000).toLocaleTimeString() : 'N/A'}
               </div>
             </div>
@@ -198,17 +198,16 @@ export default function TokenInspectorModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 bg-slate-950/80 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>💡 Production Security: Never store sensitive credentials (like passwords) in JWT claims.</span>
+        <div className="px-6 py-3 bg-neutral-50 dark:bg-neutral-900/80 border-t border-neutral-200 dark:border-neutral-800 text-[11px] text-neutral-500 flex items-center justify-between">
+          <span>Security Architecture Reference</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition"
+            className="px-4 py-1.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-xs font-bold transition"
           >
-            Close Inspector
+            Close
           </button>
         </div>
       </div>
     </div>
   );
 }
-

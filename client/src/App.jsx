@@ -16,7 +16,7 @@ import AuthLab from './pages/AuthLab';
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
+    <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-100 transition-colors duration-200">
       <Navbar />
       <main className="flex-1 pb-16">
         <Routes>
@@ -56,16 +56,15 @@ export default function App() {
       </main>
 
       {/* Global Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-6 text-center text-xs text-slate-500 font-mono">
+      <footer className="border-t border-neutral-200 dark:border-neutral-900 bg-white/80 dark:bg-black/80 py-6 text-center text-xs text-neutral-500 font-mono">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>AuthShield Reference Implementation — React, Express & PostgreSQL / SQLite</span>
+            <span className="w-2 h-2 rounded-full bg-neutral-900 dark:bg-white"></span>
+            <span>AuthShield — React, Node.js, Express & PostgreSQL / SQLite</span>
           </div>
-          <div>Bcrypt (12 Rounds) • JWT (HS256) • Refresh Token Rotation • RBAC</div>
+          <div>Bcrypt (12 Rounds) • JWT • Refresh Token Rotation • RBAC</div>
         </div>
       </footer>
     </div>
   );
 }
-

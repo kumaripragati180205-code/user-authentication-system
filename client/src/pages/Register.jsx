@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
-import { UserPlus, User, Mail, Lock, Eye, EyeOff, ShieldCheck, ArrowRight, AlertCircle, Loader2, Sparkles } from 'lucide-react';
+import { UserPlus, User, Mail, Lock, Eye, EyeOff, ShieldCheck, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function Register() {
   const { register } = useAuth();
@@ -33,81 +33,76 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto py-12 px-4 animate-fadeIn">
-      <div className="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6 glow-indigo relative overflow-hidden">
-        {/* Ambient glow */}
-        <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none -ml-10 -mt-10" />
-
+    <div className="max-w-md mx-auto py-12 px-4 animate-fadeIn transition-colors duration-200">
+      <div className="p-8 rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-sm space-y-6">
         {/* Header */}
-        <div className="text-center space-y-2 relative z-10">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-0.5 mx-auto shadow-lg shadow-indigo-500/30">
-            <div className="w-full h-full bg-[#0d091e] rounded-2xl flex items-center justify-center text-indigo-300">
-              <UserPlus className="w-6 h-6" />
-            </div>
+        <div className="text-center space-y-2">
+          <div className="w-12 h-12 rounded-2xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 flex items-center justify-center mx-auto shadow-sm">
+            <UserPlus className="w-5 h-5" />
           </div>
-          <h2 className="text-2xl font-black text-white tracking-tight">Create an Account</h2>
-          <p className="text-xs text-slate-300">
-            Choose your role and test the authentication workflow
+          <h2 className="text-2xl font-black text-neutral-900 dark:text-white tracking-tight">Create Account</h2>
+          <p className="text-xs text-neutral-500">
+            Choose your role and register
           </p>
         </div>
 
         {error && (
-          <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2 animate-fadeIn">
+          <div className="p-3.5 rounded-2xl border border-neutral-400 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-white text-xs flex items-center gap-2 animate-fadeIn font-semibold">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Full Name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-300">Full Name</label>
+            <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300">Full Name</label>
             <div className="relative">
-              <User className="w-4 h-4 text-indigo-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <User className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Sarah Connor"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/60 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-sm text-slate-100 placeholder-slate-500 outline-none transition"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 focus:border-black dark:focus:border-white text-sm text-neutral-900 dark:text-white placeholder-neutral-400 outline-none transition"
               />
             </div>
           </div>
 
           {/* Email */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-300">Email Address</label>
+            <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-indigo-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="sarah@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/60 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-sm text-slate-100 placeholder-slate-500 outline-none transition"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 focus:border-black dark:focus:border-white text-sm text-neutral-900 dark:text-white placeholder-neutral-400 outline-none transition"
               />
             </div>
           </div>
 
           {/* Password */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-300">Password</label>
+            <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-indigo-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Min 8 chars, 1 upper, 1 num, 1 sym"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/60 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-sm text-slate-100 placeholder-slate-500 outline-none transition"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 focus:border-black dark:focus:border-white text-sm text-neutral-900 dark:text-white placeholder-neutral-400 outline-none transition"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="p-1 text-slate-400 hover:text-slate-200 absolute right-3 top-1/2 -translate-y-1/2"
+                className="p-1 text-neutral-400 hover:text-black dark:hover:text-white absolute right-3 top-1/2 -translate-y-1/2"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -116,11 +111,11 @@ export default function Register() {
             <PasswordStrengthMeter password={password} />
           </div>
 
-          {/* Role Picker (Interactive RBAC Testing Feature) */}
+          {/* Role Picker (Separated Roles) */}
           <div className="space-y-1.5 pt-1">
-            <label className="text-xs font-semibold text-slate-300 flex items-center justify-between">
-              <span>Select Account Role</span>
-              <span className="text-[10px] text-indigo-400 font-mono">Separate Dashboards</span>
+            <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
+              <span>Account Role</span>
+              <span className="text-[10px] text-neutral-500 font-mono">Separated Dashboards</span>
             </label>
             <div className="grid grid-cols-2 gap-3">
               <button
@@ -128,14 +123,12 @@ export default function Register() {
                 onClick={() => setRole('user')}
                 className={`p-3.5 rounded-2xl border text-left transition ${
                   role === 'user'
-                    ? 'bg-emerald-500/20 border-emerald-500 text-emerald-200 shadow-md shadow-emerald-500/20'
-                    : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'border-black dark:border-white bg-black dark:bg-white text-white dark:text-black shadow-sm font-bold'
+                    : 'border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300'
                 }`}
               >
-                <div className="text-xs font-extrabold flex items-center gap-1.5">
-                  <span>👤 Standard User</span>
-                </div>
-                <div className="text-[10px] text-emerald-300/80 mt-1">User Dashboard only</div>
+                <div className="text-xs font-bold">Standard User</div>
+                <div className="text-[10px] opacity-75 mt-0.5">User Dashboard only</div>
               </button>
 
               <button
@@ -143,15 +136,12 @@ export default function Register() {
                 onClick={() => setRole('admin')}
                 className={`p-3.5 rounded-2xl border text-left transition ${
                   role === 'admin'
-                    ? 'bg-purple-500/20 border-purple-500 text-purple-200 shadow-md shadow-purple-500/20'
-                    : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'border-black dark:border-white bg-black dark:bg-white text-white dark:text-black shadow-sm font-bold'
+                    : 'border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300'
                 }`}
               >
-                <div className="text-xs font-extrabold flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
-                  <span>Admin</span>
-                </div>
-                <div className="text-[10px] text-purple-300/80 mt-1">Admin Panel only</div>
+                <div className="text-xs font-bold">Administrator</div>
+                <div className="text-[10px] opacity-75 mt-0.5">Admin Panel only</div>
               </button>
             </div>
           </div>
@@ -159,7 +149,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 disabled:opacity-50 text-white font-extrabold text-sm transition shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 mt-2"
+            className="w-full py-3.5 rounded-2xl bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 disabled:opacity-50 font-bold text-sm transition shadow-sm flex items-center justify-center gap-2 mt-2"
           >
             {isLoading ? (
               <>
@@ -175,9 +165,9 @@ export default function Register() {
           </button>
         </form>
 
-        <div className="text-center text-xs text-slate-400 pt-2 border-t border-white/10 relative z-10">
+        <div className="text-center text-xs text-neutral-500 pt-2 border-t border-neutral-200 dark:border-neutral-800">
           Already have an account?{' '}
-          <Link to="/login" className="text-pink-400 hover:text-pink-300 font-bold">
+          <Link to="/login" className="text-neutral-900 dark:text-white underline font-bold">
             Sign in here
           </Link>
         </div>
